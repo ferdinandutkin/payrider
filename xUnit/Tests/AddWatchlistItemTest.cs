@@ -23,8 +23,6 @@ namespace xUnitTests.Tests
 
         }
 
-
-       
         [Fact]
         public async Task CompanyAdditionToWatchlist_AddsIt()
         {
@@ -40,8 +38,6 @@ namespace xUnitTests.Tests
 
         }
 
-
-         
 
     }
 }

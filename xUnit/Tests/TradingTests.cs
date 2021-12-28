@@ -29,15 +29,15 @@ namespace xUnitTests.Tests
 
             var limitPrice = await _tradingPage.GetLimitPrice();
 
-            Logger.Information($"Limit price: ${limitPrice}");
+            Logger.Information($"Limit price: {limitPrice}");
 
             var currentSymbol = await _tradingPage.GetCurrentCompanySymbol();
 
-            Logger.Information($"Current company: ${currentSymbol}");
+            Logger.Information($"Current company: {currentSymbol}");
 
             await _tradingPage.EnterAmount(limitPrice);
 
-            Logger.Information($"Entered amount: ${currentSymbol}");
+            Logger.Information($"Entered amount: {limitPrice}");
 
             await _tradingPage.ClickPaperTrade();
 
@@ -62,6 +62,8 @@ namespace xUnitTests.Tests
 
             await _tradingPage.EnterAmount(amount);
 
+            Logger.Information($"Entered amount: {amount}");
+
             await _tradingPage.ClickPaperTrade();
 
             var hasInsufficientFundsPopup = await _tradingPage.HasInsufficientFundsPopup();
@@ -81,11 +83,17 @@ namespace xUnitTests.Tests
 
             var quantityOfСurrentPosition = await _tradingPage.GetQuantityOfPosition(currentSymbol);
 
+            Logger.Information($"quantity of current position {quantityOfСurrentPosition}");
+
             await _tradingPage.SelectSide(Side.Sell);
 
             await _tradingPage.SelectUnitOfMeasure(UnitOfMeasure.Quantity);
 
-            await _tradingPage.EnterAmount(quantityOfСurrentPosition + 1);
+            var amount = quantityOfСurrentPosition + 1;
+
+            await _tradingPage.EnterAmount(amount);
+
+            Logger.Information($"Entered amount: {amount}");
 
             var hasNoInsufficientFundsPopup = !await _tradingPage.HasInsufficientFundsPopup();
 
