@@ -29,9 +29,15 @@ namespace xUnitTests.Tests
 
             var limitPrice = await _tradingPage.GetLimitPrice();
 
+            Logger.Information($"Limit price: ${limitPrice}");
+
             var currentSymbol = await _tradingPage.GetCurrentCompanySymbol();
 
+            Logger.Information($"Current company: ${currentSymbol}");
+
             await _tradingPage.EnterAmount(limitPrice);
+
+            Logger.Information($"Entered amount: ${currentSymbol}");
 
             await _tradingPage.ClickPaperTrade();
 
@@ -43,8 +49,9 @@ namespace xUnitTests.Tests
 
      
 
-        [Fact]
-        public async Task PlaceOrder_WhenNetAccountValueIsInsufficient_ResultsInInsufficientFundsPopup()
+        [Theory]
+        [InlineData(1000000)]
+        public async Task PlaceOrder_WhenNetAccountValueIsInsufficient_ResultsInInsufficientFundsPopup(int amount)
         {
 
             await _tradingPage.GoToPaperTrading();
@@ -53,7 +60,7 @@ namespace xUnitTests.Tests
 
             await _tradingPage.SelectUnitOfMeasure(UnitOfMeasure.Quantity);
 
-            await _tradingPage.EnterAmount(1000000);
+            await _tradingPage.EnterAmount(amount);
 
             await _tradingPage.ClickPaperTrade();
 
@@ -65,7 +72,7 @@ namespace xUnitTests.Tests
 
 
         [Fact]
-        public async Task PlaceOffer_WhenShareAreInsufficient()
+        public async Task PlaceOffer_WhenShareAreInsufficient_DoesntResultInError()
         {
 
             await _tradingPage.GoToPaperTrading();
