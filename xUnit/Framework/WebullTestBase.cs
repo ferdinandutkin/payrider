@@ -82,9 +82,9 @@ namespace xUnitTests
 
         public override void Dispose()
         {
-            var theExceptionThrownByTest = Context.TestException;
+            var exceptionThrownByTest = Context.TestException;
 
-            if (theExceptionThrownByTest is null)
+            if (exceptionThrownByTest is not null)
             {
                 TryCaptureScreenshotAsync(PageUnderTest.Page).Wait();
             }

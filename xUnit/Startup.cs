@@ -10,7 +10,7 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddSingleton<IConfiguration, EnviromentConfiguration>();
+        services.AddSingleton<IConfiguration, EnvironmentConfiguration>();
         services.AddSingleton<IPlaywrightFixture, PlaywrightFixture>();
 
         services.AddSingleton<ICaptchaBypassUrlProvider, CaptchaBypassUrlProvider>();

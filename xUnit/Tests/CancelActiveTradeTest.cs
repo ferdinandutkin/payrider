@@ -37,7 +37,6 @@ namespace xUnitTests.Tests
                 await _tradingPage.GetUpdatedActiveTradesAsync();
             }).Wait();
 
-
         }
 
         [Fact]

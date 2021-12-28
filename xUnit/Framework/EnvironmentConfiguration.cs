@@ -2,7 +2,7 @@
 
 namespace xUnitTests
 {
-    class EnviromentConfiguration : IConfiguration
+    class EnvironmentConfiguration : IConfiguration
     {
         string _browserVariableName = "BROWSER";
         string _headlessVariableName = "HEADLESS";

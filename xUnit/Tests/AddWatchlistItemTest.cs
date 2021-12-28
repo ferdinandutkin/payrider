@@ -26,9 +26,8 @@ namespace xUnitTests.Tests
 
        
         [Fact]
-        public async Task Test()
+        public async Task CompanyAdditionToWatchlist_AddsIt()
         {
-            
             await _tradingPage.GoToPaperTrading();
 
             var symbol = await _tradingPage.GetCurrentCompanySymbol();
@@ -38,7 +37,6 @@ namespace xUnitTests.Tests
             var watchlistItems = await _tradingPage.GetUpdatedWatchListItemsAsync();
 
             Assert.Contains(new () { Symbol = symbol }, watchlistItems);
-
 
         }
 
