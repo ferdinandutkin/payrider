@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using PageObjects;
 using Shared;
 using Xunit;
@@ -27,8 +28,11 @@ namespace xUnitTests.Tests
         public async Task RemovingWatchlistItem_RemovesIt()
         {
            var items =  await _tradingPage.GetUpdatedWatchListItemsAsync();
+           Logger.Information($"initial watchlist items: {string.Join(",", items.Select(el => el.ToString()))}");
            await _tradingPage.RemoveLastAddedEntryFromMyWatchlist();
            var updatedItems = await _tradingPage.GetUpdatedWatchListItemsAsync();
+           Logger.Information($"updated watchlist items: {string.Join(",", updatedItems.Select(el => el.ToString()))}");
+
            Assert.NotEqual(updatedItems, items);
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Core;
 using PageObjects;
 using Shared;
@@ -42,9 +43,12 @@ namespace xUnitTests.Tests
         [Fact]
         public async Task CancelLastAddedTrade_RemovesItFromActiveTradeList()
         {
+            
             var initial = await _tradingPage.GetActiveTradesAsync();
+            Logger.Information($"initial trades: {string.Join(",",initial.Select(el => el.ToString()))}");
             await _tradingPage.CancelLastActiveTrade();
             var updated = await _tradingPage.GetUpdatedActiveTradesAsync();
+            Logger.Information($"updated trades: {string.Join(",", updated.Select(el => el.ToString()))}");
 
             Assert.NotEqual(updated, initial);
         }

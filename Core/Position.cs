@@ -12,6 +12,10 @@ namespace Core
         public string Name { get; set; }
         public int Quantity { get; set; }
         public decimal MarketValue { get; set; }
+        public override string ToString()
+        {
+            return $"{{{Name}, {Quantity}, {MarketValue}}}";
+        }
 
         public override bool Equals(object obj) =>
             obj is Position other
