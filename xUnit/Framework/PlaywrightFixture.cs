@@ -1,25 +1,36 @@
-﻿using Microsoft.Playwright;
-using System;
+﻿using System;
+using Microsoft.Playwright;
 
-namespace xUnitTests
+namespace xUnitTests.Framework
 {
-    public partial class PlaywrightFixture : IDisposable
+    public class PlaywrightFixture : IPlaywrightFixture
     {
         private readonly IConfiguration _configuration;
 
-        public IBrowser Browser { get; private set; }
+        public IBrowser Browser { get; }
 
-        public IPlaywright Playwright { get; private set; }
+        public IPlaywright Playwright { get; }
 
-        public IBrowserType BrowserType { get; set; }
-        public IBrowserContext Context { get; set; }
-
-       
-        public PlaywrightFixture()
+        public IBrowserType BrowserType { get; }
+        public IBrowserContext Context
         {
-            _configuration = new EnviromentConfiguration();
+            get
+            {
+
+                var context = Browser.NewContextAsync().Result;
+                context.SetDefaultNavigationTimeout(_configuration.DefaultTimeout);
+                context.SetDefaultTimeout(_configuration.DefaultTimeout);
+                return context;
+            }
+        }
+
+
+        public PlaywrightFixture(IConfiguration configuration)
+        {
+            _configuration = configuration;
 
             Playwright = Microsoft.Playwright.Playwright.CreateAsync().Result;
+
             BrowserType = Playwright[_configuration.BrowserName];
             Browser = BrowserType.LaunchAsync(new BrowserTypeLaunchOptions
             {
@@ -27,7 +38,8 @@ namespace xUnitTests
                 SlowMo = _configuration.SlowMo,
             }).Result;
 
-            Context = Browser.NewContextAsync().Result;
+            
+
 
         }
 

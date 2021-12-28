@@ -1,6 +1,6 @@
 ﻿namespace PageObjects;
 
-public class JSONArrayElement
+internal class JSONArrayElement
 {
-    
+    public string S { get; set; }
 }

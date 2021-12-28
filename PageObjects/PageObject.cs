@@ -4,7 +4,7 @@ namespace PageObjects
 {
     public abstract class PageObject
     {
-        protected readonly IPage Page;
+        public readonly IPage Page;
 
         protected PageObject(IPage page)
         {

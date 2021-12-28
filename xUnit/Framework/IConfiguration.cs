@@ -8,6 +8,8 @@
         public bool Headless { get; }
 
         public int SlowMo { get; }
+
+        public int DefaultTimeout { get; }
     }
 
 }

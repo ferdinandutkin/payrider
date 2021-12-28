@@ -12,9 +12,10 @@ namespace PageObjects
 
         public async Task<TradingPage> ClickTrade()
         {
-            await Page.ClickAsync("text=TRADE");
-
-            var page = await Page.WaitForPopupAsync();
+            var page = await Page.RunAndWaitForPopupAsync(async () =>
+            {
+                await Page.ClickAsync("text=TRADE");
+            });
 
             return new TradingPage(page);
         }
